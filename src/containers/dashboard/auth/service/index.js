@@ -1,4 +1,5 @@
 import axios from '../../../../utils/axios'
+import axios2 from 'axios'
 
 const URL_ENDPOINT = process.env.REACT_APP_URL_ENDPOINT
 
@@ -25,6 +26,25 @@ export async function auth(values) {
     } else {
 
         throw new Error(response.data.message)
+
+    }
+
+}
+
+export async function signupConfirm(token) {
+
+    const response = await axios2.get(`${URL_ENDPOINT}/v1/auth/signupPartTwo/${token}`)
+
+    if (response.data.success) {
+
+        return response.data.data
+
+    } else {
+
+        const error = new Error(response.data.message)
+        error.code = response.data.code
+
+        throw error
 
     }
 

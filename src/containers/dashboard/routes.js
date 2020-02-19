@@ -1,6 +1,7 @@
 import Index from "./index/Index"
 import SignUp from "./auth/SignUp"
 import Login from "./auth/SignIn"
+import SignUpConfirmation from "./auth/SignUpConfirmation"
 import Bus from "./bus/Index"
 import BusForm from "./bus/Form"
 import Country from "./country/Index"
@@ -64,6 +65,12 @@ const routes = [{
         layout: "/admin",
         hidden : true,
         permission : ["super admin", "admin"]
+    },
+    {
+        path: "/confirmation/:token",
+        name: "Confirmation",
+        component: SignUpConfirmation,
+        layout: "/auth"
     },
     {
         path: "/signin",
