@@ -144,7 +144,7 @@ const Signin = ({handleSubmit, submitting, dispatch, location : {state}}) => {
                                 component={renderFieldWithIcon}
                                 {...{
                                     icon: 'ni ni-lock-circle-open',
-                                    placeholder: 'Password',
+                                    placeholder: 'Mot de passe',
                                     addonType : 'prepend',
                                     inputGroupClassname : 'input-group-alternative'
                                 }}
