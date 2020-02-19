@@ -1,0 +1,4 @@
+export default {
+    USER_AUTHENTICATED : `USER_AUTHENTICATED`,
+    USER_LOGOUT : `USER_LOGOUT`
+}
