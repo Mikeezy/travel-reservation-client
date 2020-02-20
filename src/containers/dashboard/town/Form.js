@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useState,useEffect} from "react"
 import {
     Card,
     CardHeader,
@@ -9,9 +9,10 @@ import {
     Button,
     Row,
 } from "reactstrap"
-import {save} from './service/index'
+import {save,getCountries} from './service/index'
 import Header from "../../../components/dashboard/Headers/Header.jsx"
 import renderField from '../../../components/dashboard/renderField'
+import renderFieldSelectSimple from '../../../components/dashboard/renderFieldSelectSimple'
 import {
     Field,
     reduxForm,
@@ -26,11 +27,35 @@ import {dataClear} from './reducer/actions'
 
 const minLength2 = minLength(2)
 
-const CountryForm = (props) => {
-
+const TownForm = (props) => {
+    
+    const [countries,setCountries] = useState([])
     const { addToast } = useToasts()
 
     const { handleSubmit, pristine, submitting,initialValues, dispatch} = props
+
+    useEffect(() => {
+
+        if(!initialValues.id){
+            (async function () {
+
+                try {
+    
+                    const datas = await getCountries()
+                    
+                    setCountries(datas)
+    
+                } catch (error) {
+                
+                    console.error(error)
+                    setCountries([])
+        
+                }
+
+            })()
+        }
+        
+    },[initialValues])
 
     async function submit(values){
 
@@ -43,7 +68,7 @@ const CountryForm = (props) => {
                 dispatch(dataClear())
             }
 
-            dispatch(reset("countryForm"))
+            dispatch(reset("townForm"))
 
             addToast(notificationMessage.SUCCESS_MESSAGE, {
                 appearance: 'success',
@@ -52,7 +77,7 @@ const CountryForm = (props) => {
 
             if(initialValues.id){
 
-                history.push('/admin/country')
+                history.push('/admin/town')
 
             }
 
@@ -70,13 +95,13 @@ const CountryForm = (props) => {
     function clearValues(e){
         e.preventDefault()
 
-        dispatch(reset("countryForm"))
+        dispatch(reset("townForm"))
 
         if(initialValues.id){
 
             dispatch(dataClear())
 
-            history.push('/admin/country')
+            history.push('/admin/town')
 
         }
     }
@@ -91,7 +116,7 @@ const CountryForm = (props) => {
                     <div className="col">
                         <Card className="bg-secondary  shadow">
                             <CardHeader className="bg-white border-0">
-                                <h3 className="mb-0">Pays</h3>
+                                <h3 className="mb-0">Ville</h3>
                             </CardHeader>
 
                             <CardBody>
@@ -105,12 +130,42 @@ const CountryForm = (props) => {
                                     <Row>
                                         <Col>
                                             <Field
+                                                name="idCountry"
+                                                component={renderFieldSelectSimple}
+                                                {...{
+                                                    placeholder: 'Selectionner...',
+                                                    label : "Pays",
+                                                    options : countries,
+                                                    searchableValue : true,
+                                                    disableValue : initialValues.id ? true:false
+                                                }}
+                                                validate={[required]}
+                                            />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <Field
                                                 name="name"
                                                 type="text"
                                                 component={renderField}
                                                 {...{
                                                     placeholder: '',
                                                     label : "Nom"
+                                                }}
+                                                validate={[required,minLength2]}
+                                            />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <Field
+                                                name="description"
+                                                type="text"
+                                                component={renderField}
+                                                {...{
+                                                    placeholder: '',
+                                                    label : "Description"
                                                 }}
                                                 validate={[required,minLength2]}
                                             />
@@ -149,16 +204,16 @@ const CountryForm = (props) => {
 
 }
 
-const mapStateToProps = ({currentCounty}) => {
+const mapStateToProps = ({currentTown}) => {
     return {
-        initialValues: currentCounty
+        initialValues: currentTown
     }
 }
 
-const countryFormReduxForm = reduxForm({
-    form: 'countryForm',
+const townFormReduxForm = reduxForm({
+    form: 'townForm',
     enableReinitialize: true,
     destroyOnUnmount : false
-})(CountryForm)
+})(TownForm)
 
-export default connect(mapStateToProps, null)(countryFormReduxForm)
+export default connect(mapStateToProps, null)(townFormReduxForm)

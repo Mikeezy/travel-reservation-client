@@ -8,6 +8,8 @@ import Country from "./country/Index"
 import CountryForm from "./country/Form"
 import User from "./user/Index"
 import UserForm from "./user/Form"
+import Town from "./town/Index"
+import TownForm from "./town/Form"
 
 
 const routes = [{
@@ -21,7 +23,7 @@ const routes = [{
     {
         path: "/bus",
         name: "Bus",
-        icon: "ni ni-delivery-fast text-primary",
+        icon: "ni ni-bus-front-12 text-primary",
         component: Bus,
         layout: "/admin",
         permission : ["super admin", "admin", "manager"]
@@ -46,6 +48,22 @@ const routes = [{
         path: "/country/save",
         name: "Pays",
         component: CountryForm,
+        layout: "/admin",
+        hidden : true,
+        permission : ["super admin", "admin", "manager"]
+    },
+    {
+        path: "/town",
+        name: "Ville",
+        icon: "ni ni-istanbul text-primary",
+        component: Town,
+        layout: "/admin",
+        permission : ["super admin", "admin", "manager"]
+    },
+    {
+        path: "/town/save",
+        name: "Ville",
+        component: TownForm,
         layout: "/admin",
         hidden : true,
         permission : ["super admin", "admin", "manager"]
