@@ -11,6 +11,7 @@ import { ToastProvider} from 'react-toast-notifications'
 import "./assets/vendor/nucleo/css/nucleo.css";
 import "./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/scss/argon-dashboard-react.scss";
+import './assets/css/react-datetime.css'
 
 
 dotEnv.config()

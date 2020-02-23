@@ -40,9 +40,14 @@ export function getRoleFormated(data) {
 
 }
 
-export function reload(page) {
+export function reload(page,state = {}) {
 
     history.push('/admin/reload')
+
+    if(state && Object.keys(state).length > 0){
+        history.push(page,state)
+    }
+    
     history.push(page)
 
 }
