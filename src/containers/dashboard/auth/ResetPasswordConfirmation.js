@@ -14,7 +14,7 @@ import {
 } from "reactstrap"
 import {
     checkToken,
-    signupAdminConfirm
+    resetPasswordConfirm
 } from "./service/index"
 import notificationMessage from '../../../utils/notificationMessage'
 import history from '../../../utils/history'
@@ -22,9 +22,7 @@ import {
     useParams
 } from 'react-router-dom'
 
-const minLength2 = minLength(2)
 const minLength7 = minLength(7)
-const minLength12 = minLength(12)
 const confirmPasswordRequired = confirmPassword('password')
 
 const INIT = "INIT"
@@ -41,7 +39,7 @@ function getMessage (error) {
     }
 }
 
-const Signup = ({handleSubmit, submitting}) => {
+const ResetPasswordConfirmation = ({handleSubmit, submitting}) => {
     
     const [alertMessage,setAlertMessage] = useState({show:true, type : 'warning', message : 'Vérification en cours...'})
     const [step,setStep] = useState(INIT)
@@ -54,9 +52,9 @@ const Signup = ({handleSubmit, submitting}) => {
             try {
             
                 await checkToken(token)
-
+                
                 setAlertMessage({show : false})
-    
+
                 setStep(PENDING)
     
             } catch (error) {
@@ -81,14 +79,14 @@ const Signup = ({handleSubmit, submitting}) => {
         
         try {
         
-            await signupAdminConfirm(values,token)
+            await resetPasswordConfirm(values,token)
 
             setStep(FINISH)
 
             setAlertMessage({
                 show: true,
                 type : 'success',
-                message : `Compte crée avec succès ! vous pouvez maintenant vous connecter.`
+                message : `Mot de passe modifié avec succès ! vous pouvez maintenant vous connecter.`
             })
 
         } catch (error) {
@@ -149,52 +147,10 @@ const Signup = ({handleSubmit, submitting}) => {
                         <CardBody className="px-lg-5 py-lg-5">
                         
                             <div className="text-center text-muted mb-4">
-                                <small>Inscription</small>
+                                <small>Mot de passe</small>
                             </div>
     
                             <Form role="form" onSubmit={handleSubmit(submit)} >
-                                
-                                <Field
-                                    name="lastname"
-                                    type="text"
-                                    component={renderFieldWithIcon}
-                                    {...{
-                                        icon: 'ni ni-badge',
-                                        placeholder: 'Nom',
-                                        addonType : 'prepend',
-                                        inputGroupClassname : 'input-group-alternative',
-                                        formGroupClassname : 'mb-3'
-                                    }}
-                                    validate={[required,minLength2]}
-                                />
-
-                                <Field
-                                    name="firstname"
-                                    type="text"
-                                    component={renderFieldWithIcon}
-                                    {...{
-                                        icon: 'ni ni-badge',
-                                        placeholder: 'Prénom',
-                                        addonType : 'prepend',
-                                        inputGroupClassname : 'input-group-alternative',
-                                        formGroupClassname : 'mb-3'
-                                    }}
-                                    validate={[required,minLength2]}
-                                />
-
-                                <Field
-                                    name="phone_number"
-                                    type="text"
-                                    component={renderFieldWithIcon}
-                                    {...{
-                                        icon: 'ni ni-collection',
-                                        placeholder: 'Téléphone (exemple : +22998574411)',
-                                        addonType : 'prepend',
-                                        inputGroupClassname : 'input-group-alternative',
-                                        formGroupClassname : 'mb-3'
-                                    }}
-                                    validate={[required,minLength12]}
-                                />
                                 
                                 <Field
                                     name="password"
@@ -243,8 +199,8 @@ const Signup = ({handleSubmit, submitting}) => {
 
 }
 
-const SignupFormReduxForm = reduxForm({
-    form: 'signupForm'
-})(Signup)
+const ResetPasswordConfirmationFormReduxForm = reduxForm({
+    form: 'resetPasswordConfirmationForm'
+})(ResetPasswordConfirmation)
 
-export default connect(null,null)(SignupFormReduxForm)
+export default connect(null,null)(ResetPasswordConfirmationFormReduxForm)
