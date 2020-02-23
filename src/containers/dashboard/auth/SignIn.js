@@ -167,7 +167,7 @@ const Signin = ({handleSubmit, submitting, dispatch, location : {state}}) => {
 
                     <Col xs="6">
 
-                        <Link to="/auth/resetPassword" className="text-light" >
+                        <Link to="/auth/resetPassword_" className="text-light" >
                             <small>Mot de passe oublié ?</small>
                         </Link>
                         

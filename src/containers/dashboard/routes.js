@@ -2,6 +2,8 @@ import Index from "./index/Index"
 import SignUp from "./auth/SignUp"
 import Login from "./auth/SignIn"
 import SignUpConfirmation from "./auth/SignUpConfirmation"
+import ResetPasswordConfirmation from "./auth/ResetPasswordConfirmation"
+import ResetPassword from "./auth/ResetPassword"
 import Bus from "./bus/Index"
 import BusForm from "./bus/Form"
 import Country from "./country/Index"
@@ -99,8 +101,19 @@ const routes = [{
     {
         path: "/signin",
         name: "Login",
-        icon: "ni ni-key-25 text-info",
         component: Login,
+        layout: "/auth"
+    },
+    {
+        path: "/resetPassword/:token",
+        name: "Mot de passe oublié",
+        component: ResetPasswordConfirmation,
+        layout: "/auth"
+    },
+    {
+        path: "/resetPassword_",
+        name: "Mot de passe oublié",
+        component: ResetPassword,
         layout: "/auth"
     }
 ];

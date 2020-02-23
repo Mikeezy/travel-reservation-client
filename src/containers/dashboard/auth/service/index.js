@@ -31,6 +31,41 @@ export async function auth(values) {
 
 }
 
+export async function resetPassword(values) {
+
+    const response = await axios2.post(`${URL_ENDPOINT}/v1/auth/resetPasswordPartOne`, values)
+
+    if (response.data.success) {
+
+        return response.data.data
+
+    } else {
+
+        throw new Error(response.data.message)
+
+    }
+
+}
+
+export async function resetPasswordConfirm(values,token) {
+
+    const response = await axios2.post(`${URL_ENDPOINT}/v1/auth/resetPasswordPartTwo/${token}`,values)
+
+    if (response.data.success) {
+
+        return response.data.data
+
+    } else {
+
+        const error = new Error(response.data.message)
+        error.code = response.data.code
+
+        throw error
+
+    }
+
+}
+
 export async function signupConfirm(token) {
 
     const response = await axios2.get(`${URL_ENDPOINT}/v1/auth/signupPartTwo/${token}`)
