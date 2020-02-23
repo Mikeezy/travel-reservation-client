@@ -10,6 +10,10 @@ import User from "./user/Index"
 import UserForm from "./user/Form"
 import Town from "./town/Index"
 import TownForm from "./town/Form"
+import Travel from "./travel/Index"
+import TravelForm from "./travel/Form"
+import Booking from "./travel/Booking"
+import BookingForm from "./travel/FormBooking"
 
 
 const routes = [{
@@ -18,6 +22,38 @@ const routes = [{
         icon: "ni ni-tv-2 text-primary",
         component: Index,
         layout: "/admin",
+        permission : ["super admin", "admin", "manager"]
+    },
+    {
+        path: "/travel",
+        name: "Voyage",
+        icon: "ni ni-map-big text-primary",
+        component: Travel,
+        layout: "/admin",
+        permission : ["super admin", "admin", "manager"]
+    },
+    {
+        path: "/travel/save",
+        name: "Voyage",
+        component: TravelForm,
+        layout: "/admin",
+        hidden : true,
+        permission : ["super admin", "admin", "manager"]
+    },
+    {
+        path: "/travel/getBookings/:id",
+        name: "Réservation",
+        component: Booking,
+        layout: "/admin",
+        hidden : true,
+        permission : ["super admin", "admin", "manager"]
+    },
+    {
+        path: "/travel/addBookings/:id",
+        name: "Réservation",
+        component: BookingForm,
+        layout: "/admin",
+        hidden : true,
         permission : ["super admin", "admin", "manager"]
     },
     {
