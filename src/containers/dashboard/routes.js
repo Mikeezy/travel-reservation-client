@@ -16,6 +16,7 @@ import Travel from "./travel/Index"
 import TravelForm from "./travel/Form"
 import Booking from "./travel/Booking"
 import BookingForm from "./travel/FormBooking"
+import SearchBooking from "./travel/SearchBooking"
 
 
 const routes = [{
@@ -23,6 +24,14 @@ const routes = [{
         name: "Dashboard",
         icon: "ni ni-tv-2 text-primary",
         component: Index,
+        layout: "/admin",
+        permission : ["super admin", "admin", "manager"]
+    },
+    {
+        path: "/travel/search",
+        name: "Rechercher voyage",
+        icon: "ni ni-square-pin text-warning",
+        component: SearchBooking,
         layout: "/admin",
         permission : ["super admin", "admin", "manager"]
     },

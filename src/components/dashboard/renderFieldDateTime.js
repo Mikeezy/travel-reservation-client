@@ -32,10 +32,10 @@ const renderField = ({
                 {...input}
                 placeholder={placeholder || ''}
                 dateFormat={dateFormat}
-                timeFormat={timeFormat}
-                selected={input.value ? moment(input.value, `${dateFormat} ${timeFormat}`) : null}
+                timeFormat={timeFormat ? timeFormat : false}
+                selected={input.value ? moment(input.value, `${dateFormat} ${timeFormat ? timeFormat : ''}`) : null}
                 viewMode={'days'}
-                onChange={(value) => input.onChange(moment(value).format(`${dateFormat} ${timeFormat}`))}
+                onChange={(value) => input.onChange(moment(value).format(`${dateFormat} ${timeFormat ? timeFormat : ''}`))}
                 onBlur={() => input.onBlur()}
                 
             />

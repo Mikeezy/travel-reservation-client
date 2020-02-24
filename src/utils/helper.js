@@ -46,8 +46,10 @@ export function reload(page,state = {}) {
 
     if(state && Object.keys(state).length > 0){
         history.push(page,state)
+    }else{
+
+        history.push(page)
     }
     
-    history.push(page)
 
 }

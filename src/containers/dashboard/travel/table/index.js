@@ -80,7 +80,7 @@ const DataTable = ({datas,loading,edit,changeStatus,getBookings,addBooking}) => 
                                         <p>
                                             Prix : {new Intl.NumberFormat('fr-FR').format(rowData.price)} XOF &nbsp;/&nbsp; Bus : {formatedBusDisplay(rowData.driving)}<br/>
                                             Nombre de place restant : {rowData.remaining_place} &nbsp;/&nbsp; Nombre de place reservée : {rowData.passengers_already_get}<br/>
-                                            Date de création : {moment(rowData.created_at).format('DD/MM/YYYY HH:mm:ss')} &nbsp;/&nbsp; <Link onClick={edit} data-item={JSON.stringify({
+                                            Date de création : {moment(rowData.created_at).format('DD/MM/YYYY HH:mm:ss')} &nbsp;/&nbsp; <Link to='' onClick={edit} data-item={JSON.stringify({
                                                 id : rowData.id,
                                                 name : rowData.name,
                                                 from : rowData.from,
@@ -89,7 +89,7 @@ const DataTable = ({datas,loading,edit,changeStatus,getBookings,addBooking}) => 
                                                 date_departing : rowData.date_departing,
                                                 date_arriving : rowData.date_arriving,
                                                 driving : rowData.driving,
-                                            })} >Modifier</Link>  &nbsp;/&nbsp; <Link onClick={changeStatus} data-item={JSON.stringify({
+                                            })} >Modifier</Link>  &nbsp;/&nbsp; <Link to='' onClick={changeStatus} data-item={JSON.stringify({
                                                 _id : rowData._id,
                                             })} >Changer statut</Link>
                                         </p>
@@ -165,9 +165,9 @@ const DataTable = ({datas,loading,edit,changeStatus,getBookings,addBooking}) => 
                                 <Cell>
                                     {(rowData, rowIndex) => 
                                         <>
-                                            <Link onClick={getBookings} data-item={JSON.stringify({
+                                            <Link to='' onClick={getBookings} data-item={JSON.stringify({
                                                 id : rowData.id,
-                                            })} >Voir réservations</Link> {" | "} <Link onClick={addBooking} data-item={JSON.stringify({
+                                            })} >Voir réservations</Link> {" | "} <Link to='' onClick={addBooking} data-item={JSON.stringify({
                                                 id : rowData.id,
                                             })} >Ajouter réservation</Link>
                                         </>

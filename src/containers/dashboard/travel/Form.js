@@ -85,7 +85,7 @@ const TravelForm = (props) => {
 
             if(initialValues.id){
 
-                history.push('/admin/travel')
+                history.goBack()
 
             }
 
@@ -109,7 +109,7 @@ const TravelForm = (props) => {
 
             dispatch(dataClear())
 
-            history.push('/admin/travel')
+            history.goBack()
 
         }
     }
