@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react"
+import React,{useState} from "react"
 import {
     Card,
     CardHeader,
@@ -8,78 +8,72 @@ import {
     Button,
     Row,
 } from "reactstrap"
-import DataTable from "./table/index_booking"
-import {getAllBooking,blockBooking} from './service/index'
+import DataTable from "./table/index"
+import {getAllSearchBooking,block} from './service/index'
+import {dataLoad} from './reducer/actions'
 import Header from "../../../components/dashboard/Headers/Header.jsx"
 import ReactPaginate from 'react-paginate'
+import {useDispatch} from 'react-redux'
 import { useToasts } from 'react-toast-notifications'
 import history from '../../../utils/history'
 import notificationMessage from '../../../utils/notificationMessage'
 import {reload} from '../../../utils/helper'
-import {useParams} from 'react-router-dom'
+import FormSearchBooking from './FormSearchBooking'
 import "../../../assets/css/pagination.css"
 
 const LIMIT = 10
 
-const Index = ({location : {state}}) => {
+const Index = (props) => {
     
     const [loading,setLoading] = useState(false)
     const [datas,setData] = useState([])
+    const [searchValue,setSearchValue] = useState({})
     const [pageCount,setPageCount] = useState(1)
-    const [offset,setOffset] = useState(0)
+    const dispatch = useDispatch()
     const { addToast } = useToasts()
-    const {id} = useParams()
 
     
 
-    useEffect(() => {
-        
+    async function fetchData(offset) {
+
         setLoading(true)
 
-        async function fetchData() {
+        try {
 
-            try {
-    
-                const _datas = await getAllBooking(offset,LIMIT,id)
-                
-                setData(_datas.data)
-
-                if(offset === 0) {
-                    setPageCount(Math.ceil(+_datas.total / +LIMIT))
-                }
-    
-            } catch (error) {
+            const _datas = await getAllSearchBooking(searchValue,offset,LIMIT)
             
-                console.error(error)
-    
-            }
-            setLoading(false)
-        }
+            setData(_datas.data)
+
+        } catch (error) {
         
-        fetchData()
+            console.error(error)
+            setData([])
 
-    },[offset,id])
+        }
+        setLoading(false)
+    }
 
     
 
-    function handlePageClick({selected}){
+    async function handlePageClick({selected}){
 
-        setOffset(Math.ceil((+selected * +LIMIT)))
+        const offset = Math.ceil((+selected * +LIMIT))
+
+        await fetchData(offset)
 
     }
 
-    function goBack(e) {
+    function edit(e) {
         e.preventDefault()
-        
-        if(state && state.from){
-
-            history.push(state.from)
-        }else{
-
-            history.push('/admin/travel')
-        }
-
+        dispatch(dataLoad(JSON.parse(e.currentTarget.dataset.item)))
+        history.push('/admin/travel/save')
     }
+
+    function add(e) {
+        e.preventDefault()
+        history.push('/admin/travel/save')
+    }
+
 
     
     async function changeStatus(e) {
@@ -87,21 +81,14 @@ const Index = ({location : {state}}) => {
         
         try {
         
-            await blockBooking(JSON.parse(e.currentTarget.dataset.item))
+            await block(JSON.parse(e.currentTarget.dataset.item))
 
             addToast(notificationMessage.SUCCESS_MESSAGE, {
                 appearance: 'success',
                 autoDismiss: true,
             })
 
-            if(state && state.from){
-                
-                reload(`/admin/travel/getBookings/${id}`,state)
-            }else{
-                
-                reload(`/admin/travel/getBookings/${id}`)
-            }
-
+            reload('/admin/travel/search')
 
         } catch (error) {
         
@@ -113,12 +100,33 @@ const Index = ({location : {state}}) => {
         }
     }
 
+    async function getBookings(e) {
+        e.preventDefault()
+        
+        const data = JSON.parse(e.currentTarget.dataset.item)
+
+        history.push(`/admin/travel/getBookings/${data.id}`,{
+            from : '/admin/travel/search'
+        })
+    }
+
+    async function addBooking(e) {
+        e.preventDefault()
+        
+        const data = JSON.parse(e.currentTarget.dataset.item)
+
+        history.push(`/admin/travel/addBookings/${data.id}`)
+    }
+
     return (
         <>
             <Header />
             
             <Container className="mt--7" fluid>
 
+                <FormSearchBooking setLoading={setLoading} setData={setData} setPageCount={setPageCount} setSearchValue={setSearchValue} limit={LIMIT} />
+                <br/>
+                <br/>
                 <Row>
                     <div className="col">
                         <Card className="shadow">
@@ -130,17 +138,17 @@ const Index = ({location : {state}}) => {
                                     </Col>
                                     <Col className="text-right" xs="4">
                                         <Button
-                                            color="secondary"
-                                            onClick={goBack}
+                                            color="success"
+                                            onClick={add}
                                             size="sm"
                                         >
-                                            Retour
+                                            Ajouter
                                         </Button>
                                     </Col>
                                 </Row>
                             </CardHeader>
 
-                            <DataTable datas={datas} loading={loading} changeStatus={changeStatus} />
+                            <DataTable datas={datas} loading={loading} edit={edit} changeStatus={changeStatus} getBookings={getBookings} addBooking={addBooking} />
 
                             <CardFooter className="py-4">
                                 <nav aria-label="...">

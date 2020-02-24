@@ -23,6 +23,26 @@ export async function getAll(offset,limit) {
 
 }
 
+export async function getAllSearchBooking(values,offset,limit) {
+
+    const response = await axios.post(`${URL_ENDPOINT}/v1/travel/search?offset=${offset}&limit=${limit}`,values,{
+        headers : {
+            'Authorization' : `Bearer ${getToken()}`
+        }
+    })
+
+    if (response.data.success) {
+
+        return response.data.data
+
+    } else {
+
+        throw new Error(response.data.message)
+
+    }
+
+}
+
 export async function getAllBooking(offset,limit,id) {
 
     const response = await axios.get(`${URL_ENDPOINT}/v1/booking/${id}?offset=${offset}&limit=${limit}`,{

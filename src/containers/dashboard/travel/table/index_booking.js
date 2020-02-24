@@ -165,7 +165,7 @@ const DataTable = ({datas,loading,changeStatus}) => {
                                 <HeaderCell>Actions</HeaderCell>
                                 <Cell>
                                     {(rowData, rowIndex) => 
-                                        <Link onClick={changeStatus} data-item={JSON.stringify(rowData)}> Changer statut </Link>
+                                        <Link to='' onClick={changeStatus} data-item={JSON.stringify(rowData)}> Changer statut </Link>
                                     }
                                 </Cell>
                             </Column>

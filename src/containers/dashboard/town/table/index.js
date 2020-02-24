@@ -58,7 +58,7 @@ const DataTable = ({datas,loading,edit,changeStatus}) => {
                                 <Cell>
                                     {(rowData, rowIndex) => 
                                         <>
-                                            <Link onClick={edit} data-item={JSON.stringify(rowData)} >Modifier</Link> {" | "} <Link onClick={changeStatus} data-item={JSON.stringify(rowData)} >Changer statut</Link>
+                                            <Link to='' onClick={edit} data-item={JSON.stringify(rowData)} >Modifier</Link> {" | "} <Link to='' onClick={changeStatus} data-item={JSON.stringify(rowData)} >Changer statut</Link>
                                         </>
                                     }
                                 </Cell>
