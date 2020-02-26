@@ -13,7 +13,6 @@ const DataTable = ({datas,loading,edit,changeStatus}) => {
     return (
                         <Table 
                             virtualized
-                            autoHeight 
                             data={datas} 
                             loading={loading}
                             locale={{
@@ -39,7 +38,7 @@ const DataTable = ({datas,loading,edit,changeStatus}) => {
                                 </Cell>
                             </Column>
 
-                            <Column width={250} align="left">
+                            <Column flexGrow={1} align="left">
                                 <HeaderCell>Actions</HeaderCell>
                                 <Cell>
                                     {(rowData, rowIndex) => 

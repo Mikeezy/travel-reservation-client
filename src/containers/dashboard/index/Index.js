@@ -1,5 +1,5 @@
 import React from "react"
-import Header from "../../../components/dashboard/Headers/Header.jsx"
+import Header from "../../../components/dashboard/Headers/Header2.jsx"
 
 const Index = (props) => {
     

@@ -10,6 +10,7 @@ import Country from "./country/Index"
 import CountryForm from "./country/Form"
 import User from "./user/Index"
 import UserForm from "./user/Form"
+import Profile from "./user/Profile"
 import Town from "./town/Index"
 import TownForm from "./town/Form"
 import Travel from "./travel/Index"
@@ -21,7 +22,7 @@ import SearchBooking from "./travel/SearchBooking"
 
 const routes = [{
         path: "/index",
-        name: "Dashboard",
+        name: "Accueil",
         icon: "ni ni-tv-2 text-primary",
         component: Index,
         layout: "/admin",
@@ -81,7 +82,7 @@ const routes = [{
         component: BusForm,
         layout: "/admin",
         hidden : true,
-        permission : ["super admin", "admin", "manager"]
+        permission : []
     },
     {
         path: "/country",
@@ -130,6 +131,14 @@ const routes = [{
         layout: "/admin",
         hidden : true,
         permission : ["super admin", "admin"]
+    },
+    {
+        path: "/user-profile",
+        name: "Mon profil",
+        component: Profile,
+        layout: "/admin",
+        hidden : true,
+        permission : ["super admin", "admin", "manager"]
     },
     {
         path: "/confirmation/:token",
