@@ -66,3 +66,43 @@ export async function save(values) {
     }
 
 }
+
+export async function updateProfile(values) {
+
+    const response = await axios.post(`${URL_ENDPOINT}/v1/user/updateProfile`,values,{
+        headers : {
+            'Authorization' : `Bearer ${getToken()}`
+        }
+    })
+
+    if (response.data.success) {
+
+        return response.data.data
+
+    } else {
+
+        throw new Error(response.data.message)
+
+    }
+
+}
+
+export async function updatePassword(values) {
+
+    const response = await axios.post(`${URL_ENDPOINT}/v1/user/updatePassword`,values,{
+        headers : {
+            'Authorization' : `Bearer ${getToken()}`
+        }
+    })
+
+    if (response.data.success) {
+
+        return response.data.data
+
+    } else {
+
+        throw new Error(response.data.message)
+
+    }
+
+}

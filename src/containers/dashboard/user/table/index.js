@@ -15,7 +15,6 @@ const DataTable = ({datas,loading,changeStatus}) => {
     return (
                         <Table 
                             virtualized
-                            autoHeight 
                             data={datas} 
                             loading={loading}
                             locale={{

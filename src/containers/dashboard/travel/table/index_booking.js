@@ -65,7 +65,6 @@ const DataTable = ({datas,loading,changeStatus}) => {
     return (
                         <Table 
                             virtualized
-                            autoHeight 
                             data={datas} 
                             rowKey={rowKey}
                             expandedRowKeys={expandedRowKeys}
