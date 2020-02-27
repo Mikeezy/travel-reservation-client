@@ -61,7 +61,14 @@ const Signin = ({handleSubmit, submitting, dispatch, location : {state}}) => {
     
                 dispatch(userAuthenticated(data))
     
-                history.push('/admin/index')
+                if(state && state.from && state.from.pathname !== "/auth/signin"){
+
+                    history.push(state.from.pathname)
+
+                }else{
+
+                    history.push('/admin/index')
+                }
             }
 
         } catch (error) {

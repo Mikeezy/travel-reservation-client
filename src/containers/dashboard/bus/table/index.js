@@ -14,6 +14,7 @@ const DataTable = ({datas,loading,edit,changeStatus}) => {
                         <Table 
                             virtualized
                             data={datas} 
+                            autoHeight
                             loading={loading}
                             locale={{
                                 emptyMessage: 'La liste est vide',

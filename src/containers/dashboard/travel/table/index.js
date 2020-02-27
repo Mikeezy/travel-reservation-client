@@ -66,6 +66,7 @@ const DataTable = ({datas,loading,edit,changeStatus,getBookings,addBooking}) => 
                         <Table 
                             virtualized
                             data={datas} 
+                            autoHeight
                             rowKey={rowKey}
                             expandedRowKeys={expandedRowKeys}
                             loading={loading}

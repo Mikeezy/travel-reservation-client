@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route,Switch } from "react-router-dom";
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
@@ -8,6 +8,8 @@ import AdminFooter from "../Footers/AdminFooter.jsx";
 import Sidebar from "../Sidebar/Sidebar.jsx";
 
 import routes from "../../../containers/dashboard/routes";
+import PrivateRoute from "../PrivateRoute";
+import NotFindComponent from "../../../containers/dashboard/index/Index";
 
 class Admin extends React.Component {
 
@@ -22,9 +24,10 @@ class Admin extends React.Component {
       if (prop.layout === "/admin") {
         
         return (
-          <Route
+          <PrivateRoute
             exact
             path={prop.layout + prop.path}
+            permission={prop.permission}
             component={prop.component}
             key={key}
           />
@@ -71,6 +74,7 @@ class Admin extends React.Component {
 
           <Switch>
             {this.getRoutes(routes)}
+            <Route component={NotFindComponent}/>
           </Switch>
 
           <Container fluid>

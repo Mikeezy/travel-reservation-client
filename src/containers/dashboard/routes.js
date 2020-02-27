@@ -26,7 +26,7 @@ const routes = [{
         icon: "ni ni-tv-2 text-primary",
         component: Index,
         layout: "/admin",
-        permission : ["super admin", "admin", "manager"]
+        permission : []
     },
     {
         path: "/travel/search",
@@ -74,7 +74,7 @@ const routes = [{
         icon: "ni ni-bus-front-12 text-primary",
         component: Bus,
         layout: "/admin",
-        permission : ["super admin", "admin", "manager"]
+        permission : ["super admin", "admin"]
     },
     {
         path: "/bus/save",
@@ -82,7 +82,7 @@ const routes = [{
         component: BusForm,
         layout: "/admin",
         hidden : true,
-        permission : []
+        permission : ["super admin", "admin"]
     },
     {
         path: "/country",
@@ -90,7 +90,7 @@ const routes = [{
         icon: "ni ni-world text-primary",
         component: Country,
         layout: "/admin",
-        permission : ["super admin", "admin", "manager"]
+        permission : ["super admin", "admin"]
     },
     {
         path: "/country/save",
@@ -98,7 +98,7 @@ const routes = [{
         component: CountryForm,
         layout: "/admin",
         hidden : true,
-        permission : ["super admin", "admin", "manager"]
+        permission : ["super admin", "admin"]
     },
     {
         path: "/town",
@@ -106,7 +106,7 @@ const routes = [{
         icon: "ni ni-istanbul text-primary",
         component: Town,
         layout: "/admin",
-        permission : ["super admin", "admin", "manager"]
+        permission : ["super admin", "admin"]
     },
     {
         path: "/town/save",
@@ -114,7 +114,7 @@ const routes = [{
         component: TownForm,
         layout: "/admin",
         hidden : true,
-        permission : ["super admin", "admin", "manager"]
+        permission : ["super admin", "admin"]
     },
     {
         path: "/user",
@@ -138,7 +138,7 @@ const routes = [{
         component: Profile,
         layout: "/admin",
         hidden : true,
-        permission : ["super admin", "admin", "manager"]
+        permission : []
     },
     {
         path: "/confirmation/:token",
