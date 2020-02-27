@@ -57,7 +57,7 @@ class Sidebar extends React.Component {
   // creates the links that appear in the left menu / Sidebar
   createLinks = routes => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin" && !prop.hidden) {
+      if (prop.layout === "/admin" && !prop.hidden && (prop.permission.length === 0 || prop.permission.includes(this.props.currentUser.role))) {
         
         return (
           <NavItem key={key}>
@@ -209,4 +209,11 @@ Sidebar.propTypes = {
   })
 };
 
-export default connect(null,null)(Sidebar);
+const mapStateToProps = ({currentUser}) => {
+
+  return {
+      currentUser
+  }
+}
+
+export default connect(mapStateToProps,null)(Sidebar);
