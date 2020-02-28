@@ -19,6 +19,7 @@ import {
 import {connect} from 'react-redux'
 import { useToasts } from 'react-toast-notifications'
 import notificationMessage from '../../../utils/notificationMessage'
+import { scroller} from 'react-scroll'
 
 
 const SearchBookingForm = (props) => {
@@ -87,6 +88,10 @@ const SearchBookingForm = (props) => {
 
             setSearchValue(values)
             
+            scroller.scrollTo('bookingSearchList', {
+                duration: 500,
+                smooth: true
+            })
 
         } catch (error) {
         
