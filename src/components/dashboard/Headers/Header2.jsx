@@ -1,11 +1,42 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
 
-class Header extends React.Component {
-  render() {
-    return (
+import {getInformation} from '../../../containers/dashboard/index/service/index'
+
+const Header = (props) => {
+
+  const [daily,setDaily] = useState(0)
+  const [weekly,setWeekly] = useState(0)
+  const [monthly,setMonthly] = useState(0)
+  const [monthlyTrvl,setMonthlyTrvl] = useState(0)
+
+  useEffect(() => {
+        
+
+    (async function () {
+
+        try {
+
+            const [d,w,m,mT] = await getInformation()
+            
+            setDaily(d)
+            setWeekly(w)
+            setMonthly(m)
+            setMonthlyTrvl(mT)
+
+        } catch (error) {
+        
+            console.error(error)
+
+        }
+        
+    })()
+    
+},[])
+
+  return (
       <>
         <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
           <Container fluid>
@@ -21,23 +52,21 @@ class Header extends React.Component {
                             tag="h5"
                             className="text-uppercase text-muted mb-0"
                           >
-                            Traffic
+                            Place reservée
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            350,897
+                            {new Intl.NumberFormat('fr-FR').format(daily)}
                           </span>
                         </div>
                         <Col className="col-auto">
                           <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                            <i className="fas fa-chart-bar" />
+                            <i className="fas fa-list" />
                           </div>
                         </Col>
                       </Row>
                       <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-success mr-2">
-                          <i className="fa fa-arrow-up" /> 3.48%
-                        </span>{" "}
-                        <span className="text-nowrap">Since last month</span>
+                        
+                        <span className="text-nowrap">{"Aujourd'hui"}</span>
                       </p>
                     </CardBody>
                   </Card>
@@ -51,23 +80,21 @@ class Header extends React.Component {
                             tag="h5"
                             className="text-uppercase text-muted mb-0"
                           >
-                            New users
+                            Place reservée
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            2,356
+                            {new Intl.NumberFormat('fr-FR').format(weekly)}
                           </span>
                         </div>
                         <Col className="col-auto">
                           <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
-                            <i className="fas fa-chart-pie" />
+                            <i className="fas fa-list" />
                           </div>
                         </Col>
                       </Row>
                       <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-danger mr-2">
-                          <i className="fas fa-arrow-down" /> 3.48%
-                        </span>{" "}
-                        <span className="text-nowrap">Since last week</span>
+                        
+                        <span className="text-nowrap">Cette semaine</span>
                       </p>
                     </CardBody>
                   </Card>
@@ -81,21 +108,21 @@ class Header extends React.Component {
                             tag="h5"
                             className="text-uppercase text-muted mb-0"
                           >
-                            Sales
+                            Place reservée
                           </CardTitle>
-                          <span className="h2 font-weight-bold mb-0">924</span>
+                          <span className="h2 font-weight-bold mb-0">
+                            {new Intl.NumberFormat('fr-FR').format(monthly)}
+                          </span>
                         </div>
                         <Col className="col-auto">
                           <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                            <i className="fas fa-users" />
+                            <i className="fas fa-list" />
                           </div>
                         </Col>
                       </Row>
                       <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-warning mr-2">
-                          <i className="fas fa-arrow-down" /> 1.10%
-                        </span>{" "}
-                        <span className="text-nowrap">Since yesterday</span>
+                        
+                        <span className="text-nowrap">Ce mois</span>
                       </p>
                     </CardBody>
                   </Card>
@@ -109,23 +136,21 @@ class Header extends React.Component {
                             tag="h5"
                             className="text-uppercase text-muted mb-0"
                           >
-                            Performance
+                            Voyage
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            49,65%
+                            {new Intl.NumberFormat('fr-FR').format(monthlyTrvl)}
                           </span>
                         </div>
                         <Col className="col-auto">
                           <div className="icon icon-shape bg-info text-white rounded-circle shadow">
-                            <i className="fas fa-percent" />
+                            <i className="ni ni-delivery-fast" />
                           </div>
                         </Col>
                       </Row>
                       <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-success mr-2">
-                          <i className="fas fa-arrow-up" /> 12%
-                        </span>{" "}
-                        <span className="text-nowrap">Since last month</span>
+                        
+                        <span className="text-nowrap">Ce mois</span>
                       </p>
                     </CardBody>
                   </Card>
@@ -135,8 +160,7 @@ class Header extends React.Component {
           </Container>
         </div>
       </>
-    );
-  }
+    )
 }
 
 export default Header;

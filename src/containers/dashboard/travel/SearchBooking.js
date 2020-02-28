@@ -19,6 +19,7 @@ import history from '../../../utils/history'
 import notificationMessage from '../../../utils/notificationMessage'
 import {reload} from '../../../utils/helper'
 import FormSearchBooking from './FormSearchBooking'
+import { Element} from 'react-scroll'
 import "../../../assets/css/pagination.css"
 
 const LIMIT = 10
@@ -127,6 +128,7 @@ const Index = (props) => {
                 <FormSearchBooking setLoading={setLoading} setData={setData} setPageCount={setPageCount} setSearchValue={setSearchValue} limit={LIMIT} />
                 <br/>
                 <br/>
+                <Element name="bookingSearchList"></Element>
                 <Row>
                     <div className="col">
                         <Card className="shadow">
