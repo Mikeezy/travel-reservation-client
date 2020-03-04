@@ -28,7 +28,7 @@ const DataTable = ({datas,loading,edit,changeStatus}) => {
                             </Column>
 
                             <Column width={150} align="center" resizable>
-                                <HeaderCell>Statut</HeaderCell>
+                                <HeaderCell>Pays</HeaderCell>
                                 <Cell>
                                     {(rowData,rowIndex) => 
                                         <p>{rowData.idCountry.label}</p>
