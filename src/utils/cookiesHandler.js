@@ -5,13 +5,13 @@ const cookies = new Cookies();
 
 export const getToken = () => {
 
-    return cookies.get('lbk_a_t') || ''
+    return cookies.get('xxxx') || ''
 
 }
 
 export const setToken = (_token) => {
 
-    return cookies.set('lbk_a_t', _token,{
+    return cookies.set('xxxx', _token,{
         path : '/'
     })
 
@@ -19,7 +19,7 @@ export const setToken = (_token) => {
 
 export const removeToken = () => {
 
-    return cookies.remove('lbk_a_t',{
+    return cookies.remove('xxxx',{
         path : '/'
     })
 
