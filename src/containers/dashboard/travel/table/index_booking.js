@@ -149,6 +149,15 @@ const DataTable = ({datas,loading,changeStatus}) => {
                                 </Cell>
                             </Column>
 
+                            <Column width={150} align="center" resizable>
+                                <HeaderCell>Référence</HeaderCell>
+                                <Cell>
+                                    {(rowData,rowIndex) => 
+                                        <p>{rowData.reference}</p>
+                                    }
+                                </Cell>
+                            </Column>
+
                             <Column width={100} resizable>
                                 <HeaderCell>Statut</HeaderCell>
                                 <Cell>
